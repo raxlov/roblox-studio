@@ -1,0 +1,62 @@
+--[[ Read Me
+
+IMPORTANT : this script needs to be INSIDE an folder with parts, NOT inside an part
+as the script affects part of the SAME level
+
+
+ 
+this is how this script works
+
+local waitTime = <number>       -- how long it should wait until the color should change
+local transitionTime = <number> -- how long it should transition to the next color
+
+local colors = {
+	Color3.new(),      -- this is how it should look like if theres after that more Color3.new() inside this {bracket}
+	Color3.new(0,0,1), -- this is how it should look like with the numbers (its important you dont go higher then 1 and lower then 0)
+	Color3.new()       -- this is how it should look like at the end of the {bracket}
+}
+
+]]--
+
+local waitTime = 0 -- wait time
+local transitionTime = 1 -- transition time
+local colors = { -- colors
+    Color3.new(1,0,0),
+    Color3.new(0,1,0),
+    Color3.new(0,0,1)
+}
+
+local folder = script.Parent
+local parts = folder:GetChildren()
+
+local function transitionColor(parts, startColor, endColor, duration)
+    local steps = 100
+    local stepTime = duration / steps
+    for i = 0, steps do
+        local alpha = i / steps
+        for _, part in parts do
+            if part:IsA("BasePart") then
+                part.Color = startColor:Lerp(endColor, alpha)
+            end
+        end
+        task.wait(stepTime)
+    end
+end
+
+while true do
+    for i = 1, #colors do
+        local nextColorIndex = (i % #colors) + 1
+        transitionColor(parts, colors[i], colors[nextColorIndex], transitionTime)
+        task.wait(waitTime)
+    end
+end
+
+--[[
+
+Credits :
+Script idea    : raxlov / tutorialforbeginer
+Script creator : roblox studio assistant
+
+version : 2
+
+]]--

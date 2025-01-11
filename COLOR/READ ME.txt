@@ -1,0 +1,7 @@
+LOGS FOR COLOR'S
+
+V1, Created COLOR
+V1 bug : if there are multible parts in the same location it first takes 1 part, transitions it, then takes the seccond part and so on
+
+V2, Fixed bug
+V2 bug fixed : V1 bug < Line 4 >
